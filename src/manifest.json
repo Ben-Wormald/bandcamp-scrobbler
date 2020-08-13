@@ -1,0 +1,13 @@
+{
+  "name": "Bandcamp Scrobbler",
+  "version": "1.0",
+  "description": "Scrobble albums on Bandcamp to Last.fm",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs"
+ ],
+ "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}
