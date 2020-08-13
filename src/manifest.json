@@ -3,10 +3,17 @@
   "version": "1.0",
   "description": "Scrobble albums on Bandcamp to Last.fm",
   "browser_action": {
-    "default_popup": "index.html"
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "https://*.bandcamp.com/"
  ],
  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "manifest_version": 2
