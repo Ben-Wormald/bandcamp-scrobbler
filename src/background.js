@@ -1,7 +1,9 @@
+const { scrobble } = require('./scrobbler');
+
 chrome.runtime.onMessage.addListener(
   ({ type, data }, sender, done) => {
     if (type === 'scrobble') {
-      // send to last.fm
+      scrobble(data.albumData);
       return true;
     }
   }

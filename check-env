@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const { SECRET_KEY, API_KEY, SESSION_KEY } = process.env;
+
+if (!SECRET_KEY || !API_KEY || !SESSION_KEY) {
+  console.error('ERROR: Please export your Last.fm API credentials:');
+  console.log('  export SECRET_KEY=xxx');
+  console.log('  export API_KEY=xxx');
+  console.log('  export SESSION_KEY=xxx\n');
+  process.exit(1);
+}
