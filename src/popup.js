@@ -76,3 +76,12 @@ document.getElementById('submit').addEventListener('click', () => {
     },
   );
 });
+
+document.getElementById('token').addEventListener('click', () => {
+  chrome.runtime.sendMessage(
+    { type: 'getToken' },
+    response => {
+      // alert(response);
+    },
+  );
+});

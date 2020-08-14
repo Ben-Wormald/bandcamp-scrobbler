@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const md5 = require('js-md5');
 const querystring = require('querystring');
+const { doesNotMatch } = require('assert');
 
 // const dropInvalidDurations = process.env.DROP_INVALID_DURATIONS === 'true';
 const dropInvalidDurations = false;
@@ -74,7 +75,7 @@ const processResponse = ({ scrobbles }) => {
   return response;
 }
 
-const scrobble = async albumData => {
+const scrobble = async (albumData, done) => {
   const trackData = processTrackData(albumData);
 
   trackData.api_key = process.env.API_KEY;
@@ -94,7 +95,26 @@ const scrobble = async albumData => {
     },
   });
 
-  return processResponse(JSON.parse(response));
+  done(processResponse(JSON.parse(response)));
 }
 
+const getToken = async done => {
+  const response = await request({
+    method: 'GET',
+    uri: 'http://ws.audioscrobbler.com/2.0/',
+    qs: {
+      method: 'auth.gettoken',
+      api_key: process.env.API_KEY,
+      format: 'json',
+    },
+  });
+
+  const { token } = JSON.parse(response);
+  done({
+    token,
+    apiKey: process.env.API_KEY,
+  });
+};
+
+module.exports.getToken = getToken;
 module.exports.scrobble = scrobble;
