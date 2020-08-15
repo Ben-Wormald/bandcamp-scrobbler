@@ -17,9 +17,8 @@ module.exports = {
       ],
     }),
     new Define({
-      'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY || ''),
       'process.env.API_KEY': JSON.stringify(process.env.API_KEY || ''),
-      'process.env.SESSION_KEY': JSON.stringify(process.env.SESSION_KEY || ''),
+      'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY || ''),
     }),
   ],
   node: {
