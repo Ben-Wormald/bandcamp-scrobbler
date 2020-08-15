@@ -10,7 +10,7 @@ const handleMessage = async (type, data, done) => {
 
     chrome.storage.sync.set({ token }, () => {
       console.log('Saved auth token to storage');
-      done(token);
+      done();
     });
   }
 
@@ -21,7 +21,7 @@ const handleMessage = async (type, data, done) => {
 
       chrome.storage.sync.set({ key, name }, () => {
         console.log('Saved session key and username to storage');
-        done({ key, name });
+        done(name);
       });
     };
 
