@@ -81,7 +81,16 @@ document.getElementById('token').addEventListener('click', () => {
   chrome.runtime.sendMessage(
     { type: 'getToken' },
     response => {
-      // alert(response);
+      alert(`got auth token: ${response}`);
+    },
+  );
+});
+
+document.getElementById('session').addEventListener('click', () => {
+  chrome.runtime.sendMessage(
+    { type: 'getSession' },
+    response => {
+      alert(`got sesh key: ${response}`);
     },
   );
 });
