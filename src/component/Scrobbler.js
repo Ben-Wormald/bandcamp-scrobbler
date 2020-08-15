@@ -40,7 +40,7 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
       <h2>Logged in as {username}</h2>
       <div className="scrobbler">
         {!loading && !response && album &&
-          <Album album={album} handleScrobble={handleScrobble} />
+          <Album album={album} setAlbum={setAlbum} handleScrobble={handleScrobble} />
         }
         {!loading && !response && !album &&
           <p>Open a Bandcamp album page to scrobble</p>
