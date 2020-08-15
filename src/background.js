@@ -32,9 +32,16 @@ const handleMessage = async (type, data, done) => {
   }
   
   if (type === 'scrobble') {
-    const response = await scrobble(data.albumData);
-    console.log('Scrobbled', response);
-    done(response);
+    const handleScrobble = async (albumData, key, done) => {
+      const response = await scrobble(albumData, key);
+      console.log('Scrobbled', response);
+      done(response);
+    };
+
+    chrome.storage.sync.get(['key'], ({ key }) => {
+      console.log(`Got session key from storage ${key}`);
+      handleScrobble(data.albumData, key, done);
+    });
   }
 };
 

@@ -75,11 +75,11 @@ const processResponse = ({ scrobbles }) => {
   return response;
 }
 
-const scrobble = async albumData => {
+const scrobble = async (albumData, sessionKey) => {
   const trackData = processTrackData(albumData);
 
   trackData.api_key = process.env.API_KEY;
-  trackData.sk = process.env.SESSION_KEY;
+  trackData.sk = sessionKey;
   trackData.method = 'track.scrobble';
   trackData.format = 'json';
   trackData.api_sig = generateSignature(trackData);
@@ -133,7 +133,7 @@ const getSession = async token => {
     qs,
   });
 
-  const { key, name } = JSON.parse(response);
+  const { session: { key, name } } = JSON.parse(response);
   return { key, name };
 };
 
