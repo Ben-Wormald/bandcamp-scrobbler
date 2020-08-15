@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const md5 = require('js-md5');
 const querystring = require('querystring');
+const { doesNotMatch } = require('assert');
 
 // const dropInvalidDurations = process.env.DROP_INVALID_DURATIONS === 'true';
 const dropInvalidDurations = false;
@@ -74,11 +75,11 @@ const processResponse = ({ scrobbles }) => {
   return response;
 }
 
-const scrobble = async albumData => {
+const scrobble = async (albumData, sessionKey) => {
   const trackData = processTrackData(albumData);
 
   trackData.api_key = process.env.API_KEY;
-  trackData.sk = process.env.SESSION_KEY;
+  trackData.sk = sessionKey;
   trackData.method = 'track.scrobble';
   trackData.format = 'json';
   trackData.api_sig = generateSignature(trackData);
@@ -88,7 +89,7 @@ const scrobble = async albumData => {
   const response = await request({
     method: 'POST',
     uri: 'http://ws.audioscrobbler.com/2.0/',
-    body: body,
+    body,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
@@ -97,4 +98,45 @@ const scrobble = async albumData => {
   return processResponse(JSON.parse(response));
 }
 
+const getToken = async () => {
+  const qs = {
+    method: 'auth.gettoken',
+    api_key: process.env.API_KEY,
+    format: 'json',
+  };
+
+  const response = await request({
+    method: 'GET',
+    uri: 'http://ws.audioscrobbler.com/2.0/',
+    qs
+  });
+
+  const { token } = JSON.parse(response);
+  return {
+    token,
+    apiKey: process.env.API_KEY,
+  };
+};
+
+const getSession = async token => {
+  const qs = {
+    method: 'auth.getsession',
+    api_key: process.env.API_KEY,
+    token,
+    format: 'json',
+  };
+  qs.api_sig = generateSignature(qs);
+
+  const response = await request({
+    method: 'GET',
+    uri: 'http://ws.audioscrobbler.com/2.0/',
+    qs,
+  });
+
+  const { session: { key, name } } = JSON.parse(response);
+  return { key, name };
+};
+
 module.exports.scrobble = scrobble;
+module.exports.getToken = getToken;
+module.exports.getSession = getSession;

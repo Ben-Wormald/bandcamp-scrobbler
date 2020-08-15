@@ -76,3 +76,21 @@ document.getElementById('submit').addEventListener('click', () => {
     },
   );
 });
+
+document.getElementById('token').addEventListener('click', () => {
+  chrome.runtime.sendMessage(
+    { type: 'getToken' },
+    response => {
+      // alert('got auth token');
+    },
+  );
+});
+
+document.getElementById('session').addEventListener('click', () => {
+  chrome.runtime.sendMessage(
+    { type: 'getSession' },
+    username => {
+      alert(`Logged in as ${username}`);
+    },
+  );
+});

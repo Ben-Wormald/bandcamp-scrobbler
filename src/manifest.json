@@ -13,6 +13,7 @@
   },
   "permissions": [
     "tabs",
+    "storage",
     "https://*.bandcamp.com/"
  ],
  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
