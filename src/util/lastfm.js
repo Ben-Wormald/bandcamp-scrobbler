@@ -1,7 +1,6 @@
 const request = require('request-promise');
 const md5 = require('js-md5');
 const querystring = require('querystring');
-const { doesNotMatch } = require('assert');
 
 // const dropInvalidDurations = process.env.DROP_INVALID_DURATIONS === 'true';
 const dropInvalidDurations = false;

@@ -1,4 +1,4 @@
-const { scrobble, getToken, getSession } = require('./lastfm');
+const { scrobble, getToken, getSession } = require('./util/lastfm');
 
 const handleMessage = async (type, data, done) => {
   if (type === 'getToken') {
@@ -19,9 +19,11 @@ const handleMessage = async (type, data, done) => {
       const { key, name } = await getSession(token);
       console.log(`Got session key ${key} for user ${name}`);
 
-      chrome.storage.sync.set({ key, name }, () => {
+      // TODO handle token not validated
+
+      chrome.storage.sync.set({ token: null, key, name }, () => {
         console.log('Saved session key and username to storage');
-        done(name);
+        done({ username: name });
       });
     };
 
@@ -30,17 +32,36 @@ const handleMessage = async (type, data, done) => {
       handleGetSession(token, done);
     });
   }
+
+  if (type === 'getLogin') {
+    chrome.storage.sync.get(['token', 'name'], ({ token, name }) => {
+      const response = {
+        hasToken: !!token,
+        username: name
+      };
+      console.log('Login retrieved from storage', response);
+      done(response);
+    });
+  }
+
+  if (type === 'signOut') {
+    chrome.storage.sync.set({ token: null, key: null, name: null }, () => {
+      console.log('Signed out and cleared storage');
+      done();
+    });
+  }
   
   if (type === 'scrobble') {
-    const handleScrobble = async (albumData, key, done) => {
-      const response = await scrobble(albumData, key);
+    const handleScrobble = async (album, key, done) => {
+      console.log('About to scrobble', album);
+      const response = await scrobble(album, key);
       console.log('Scrobbled', response);
       done(response);
     };
 
     chrome.storage.sync.get(['key'], ({ key }) => {
       console.log(`Got session key from storage ${key}`);
-      handleScrobble(data.albumData, key, done);
+      handleScrobble(data.album, key, done);
     });
   }
 };
