@@ -3,6 +3,22 @@ const { CleanWebpackPlugin: Clean } = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 
 module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              'preact',
+            ],
+          },
+        },
+      },
+    ],
+  },
   entry: {
     popup: './src/popup.js',
     background: './src/background.js',
@@ -26,4 +42,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
   },
+  performance: { hints: false },
 };
