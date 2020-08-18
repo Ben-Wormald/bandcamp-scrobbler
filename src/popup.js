@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div className="popup">
-      <h1>Bandcamp Scrobbler</h1>
+      <h1>bandcamp scrobbler</h1>
       {!loading && !username &&
         <Auth hasToken={hasToken} setHasToken={setHasToken} setUsername={setUsername} />
       }
@@ -27,7 +27,7 @@ const App = () => {
         <Scrobbler username={username} setHasToken={setHasToken} setUsername={setUsername} />
       }
       {loading &&
-        <h2>Loading...</h2>
+        <h2>loading...</h2>
       }
     </div>
   );

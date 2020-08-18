@@ -1,3 +1,84 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.popup {
+  width: 600px;
+  margin-bottom: 16px;
+}
+
+h1, h2 {
+  margin-left: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(169, 34, 22);
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  height: 8px;
+  background: rgb(76, 158, 191);
+  background: linear-gradient(90deg, rgb(76, 158, 191) 0%, rgb(169, 34, 22) 100%);
+}
+
+.scrobbler {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .album {
-  width: 500px;
+  margin-top: 8px;
+  overflow: auto;
+}
+
+.label {
+  color: #272727;
+}
+
+.row input {
+  width: 180px;
+  display: inline-block;
+  margin: 8px;
+  padding: 4px;
+  border: none;
+  border-bottom: 1px solid #272727;
+  background: none;
+  font-family: monospace;
+}
+
+.row p {
+  width: 180px;
+  display: inline-block;
+  margin: 8px;
+  padding: 4px;
+}
+
+.row .track-index {
+  width: 16px;
+}
+
+.row .duration {
+  width: 80px;
+}
+
+.scrobble-button {
+  color: white;
+  background-color: rgb(169, 34, 22);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  float: right;
+  margin-top: 8px;
+}
+
+.scrobble-button:hover {
+  text-decoration: underline;
 }
