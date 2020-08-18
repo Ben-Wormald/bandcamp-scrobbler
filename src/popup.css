@@ -30,8 +30,8 @@ a:hover {
 }
 
 .scrobbler {
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .album {
@@ -51,7 +51,6 @@ a:hover {
   border: none;
   border-bottom: 1px solid #272727;
   background: none;
-  font-family: monospace;
 }
 
 .row p {
@@ -69,16 +68,24 @@ a:hover {
   width: 80px;
 }
 
-.scrobble-button {
+button {
   color: white;
   background-color: rgb(169, 34, 22);
   border: none;
   cursor: pointer;
   padding: 8px;
-  float: right;
   margin-top: 8px;
 }
 
-.scrobble-button:hover {
+button:hover {
   text-decoration: underline;
+}
+
+.scrobble-button {
+  float: right;
+  margin-right: 8px;
+}
+
+.auth {
+  padding-left: 24px;
 }
