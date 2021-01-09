@@ -1,4 +1,4 @@
-const { h } = require('preact');
+const { h, Fragment } = require('preact');
 const { useState, useEffect } = require('preact/hooks');
 const { Album } = require('./Album');
 const { sendMessage, getAlbumInfo } = require('../util/chrome');
@@ -36,28 +36,28 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
   };
 
   return (
-    <div>
-      <h2>Logged in as {username}</h2>
+    <Fragment>
+      <h2>signed in as <a href={`https://www.last.fm/user/${username}`}>{username}</a> | <a onClick={handleSignOut}>sign out</a></h2>
+      <div className="divider"></div>
       <div className="scrobbler">
         {!loading && !response && album &&
           <Album album={album} setAlbum={setAlbum} handleScrobble={handleScrobble} />
         }
         {!loading && !response && !album &&
-          <p>Open a Bandcamp album page to scrobble</p>
+          <p>open a bandcamp album page to scrobble</p>
         }
         {!loading && response &&
           <div>
-            <p>Done!</p>
+            <p>done!</p>
             <p>{response.accepted} tracks scrobbled</p>
             {response.ignored.length && <p>{response.ignored.length} tracks ignored</p>}
           </div>
         }
         {loading &&
-          <p>Loading...</p>
+          <h2>loading...</h2>
         }
       </div>
-      <button onClick={handleSignOut}>Sign out</button>
-    </div>
+    </Fragment>
   );
 };
 

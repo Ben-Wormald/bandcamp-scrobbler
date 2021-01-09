@@ -16,10 +16,13 @@ const Auth = ({ hasToken, setHasToken, setUsername }) => {
   };
 
   return (
-    <div>
+    <div className="auth">
       {!hasToken
-        ? <button onClick={handleSignIn}>Sign in with Last.fm</button>
-        : <button onClick={handleDone}>Click here when done</button>
+        ? <button onClick={handleSignIn}>sign in with Last.fm</button>
+        : <div>
+            <p>allow this app access through Last.fm. when you're finished, click the button below</p>
+            <button onClick={handleDone}>continue</button>
+          </div>
       }
     </div>
   );
