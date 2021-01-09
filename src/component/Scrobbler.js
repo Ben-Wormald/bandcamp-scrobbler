@@ -2,6 +2,7 @@ const { h, Fragment } = require('preact');
 const { useState, useEffect } = require('preact/hooks');
 const { Album } = require('./Album');
 const { sendMessage, getAlbumInfo, openTab } = require('../util/chrome');
+const { checkCompilation } = require('../util/lastfm');
 
 const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
   useEffect(() => {
     getAlbumInfo(
       albumInfo => {
-        setAlbum(albumInfo);
+        setAlbum(checkCompilation(albumInfo));
         setLoading(false);
       },
       error => {
