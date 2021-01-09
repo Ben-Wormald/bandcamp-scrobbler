@@ -27,5 +27,8 @@ const getAlbumInfo = (done, error) => {
   });
 };
 
+const openTab = url => chrome.tabs.create({ active: true, url });
+
 module.exports.sendMessage = sendMessage;
 module.exports.getAlbumInfo = getAlbumInfo;
+module.exports.openTab = openTab;
