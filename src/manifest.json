@@ -2,6 +2,11 @@
   "name": "Bandcamp Scrobbler",
   "version": "1.0",
   "description": "Scrobble albums on Bandcamp to Last.fm",
+  "icons": {
+    "16": "resource/icon16.png",
+    "48": "resource/icon48.png",
+    "128": "resource/icon128.png"
+  },
   "browser_action": {
     "default_popup": "popup.html"
   },

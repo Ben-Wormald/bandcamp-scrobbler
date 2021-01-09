@@ -30,6 +30,7 @@ module.exports = {
         { from: './src/popup.html' },
         { from: './src/popup.css' },
         { from: './src/manifest.json' },
+        { from: './src/resource/', to: 'resource/' },
       ],
     }),
     new Define({
