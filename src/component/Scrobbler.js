@@ -1,7 +1,7 @@
 const { h, Fragment } = require('preact');
 const { useState, useEffect } = require('preact/hooks');
 const { Album } = require('./Album');
-const { sendMessage, getAlbumInfo } = require('../util/chrome');
+const { sendMessage, getAlbumInfo, openTab } = require('../util/chrome');
 
 const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [loading, setLoading] = useState(true);
@@ -37,14 +37,14 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
 
   return (
     <Fragment>
-      <h2>signed in as <a href={`https://www.last.fm/user/${username}`}>{username}</a> | <a onClick={handleSignOut}>sign out</a></h2>
+      <h2>signed in as <a onClick={() => openTab(`https://www.last.fm/user/${username}`)}>{username}</a> | <a onClick={handleSignOut}>sign out</a></h2>
       <div className="divider"></div>
       <div className="scrobbler">
         {!loading && !response && album &&
           <Album album={album} setAlbum={setAlbum} handleScrobble={handleScrobble} />
         }
         {!loading && !response && !album &&
-          <p>open a bandcamp album page to scrobble</p>
+          <p>open a <a onClick={() => openTab('https://bandcamp.com')} className="a--blue">bandcamp</a> album page to scrobble</p>
         }
         {!loading && response &&
           <div>
