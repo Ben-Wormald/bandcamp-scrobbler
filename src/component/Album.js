@@ -19,7 +19,7 @@ const Album = ({ album, setAlbum, handleScrobble }) => {
     return (
       <div className="row">
         <p className="track-index">{index + 1}</p>
-        <input type="text" value={album.artist} onChange={updateTrack(index, 'artist')} />
+        <input type="text" value={track.artist} onChange={updateTrack(index, 'artist')} placeholder={album.artist} />
         <input type="text" value={track.name} onChange={updateTrack(index, 'name')} />
         <input type="text" value={track.duration} onChange={updateTrack(index, 'duration')} className="duration" />
       </div>
