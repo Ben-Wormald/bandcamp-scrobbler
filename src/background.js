@@ -67,7 +67,7 @@ const handleMessage = async (type, data, done) => {
 };
 
 chrome.runtime.onMessage.addListener(
-  ({ type, data }, sender, done) => {
+  ({ type, data }, _sender, done) => {
     handleMessage(type, data, done);
     return true;
   }

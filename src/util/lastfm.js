@@ -1,6 +1,4 @@
-const request = require('request-promise');
 const md5 = require('js-md5');
-const querystring = require('querystring');
 
 const dropInvalidDurations = false;
 
@@ -82,34 +80,31 @@ const scrobble = async (albumData, sessionKey) => {
   trackData.format = 'json';
   trackData.api_sig = generateSignature(trackData);
 
-  const body = querystring.stringify(trackData);
+  const body = new URLSearchParams(trackData).toString();
 
-  const response = await request({
+  const response = await fetch('http://ws.audioscrobbler.com/2.0/', {
     method: 'POST',
-    uri: 'http://ws.audioscrobbler.com/2.0/',
     body,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 
-  return processResponse(JSON.parse(response));
+  const json = await response.json();
+  return processResponse(json);
 }
 
 const getToken = async () => {
-  const qs = {
+  const params = {
     method: 'auth.gettoken',
     api_key: process.env.API_KEY,
     format: 'json',
   };
 
-  const response = await request({
-    method: 'GET',
-    uri: 'http://ws.audioscrobbler.com/2.0/',
-    qs
-  });
+  const url = `http://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
+  const response = await fetch(url);
 
-  const { token } = JSON.parse(response);
+  const { token } = await response.json();
   return {
     token,
     apiKey: process.env.API_KEY,
@@ -117,21 +112,18 @@ const getToken = async () => {
 };
 
 const getSession = async token => {
-  const qs = {
+  const params = {
     method: 'auth.getsession',
     api_key: process.env.API_KEY,
     token,
     format: 'json',
   };
-  qs.api_sig = generateSignature(qs);
+  params.api_sig = generateSignature(params);
 
-  const response = await request({
-    method: 'GET',
-    uri: 'http://ws.audioscrobbler.com/2.0/',
-    qs,
-  });
+  const url = `http://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
+  const response = await fetch(url);
 
-  const { session: { key, name } } = JSON.parse(response);
+  const { session: { key, name } } = await response.json();
   return { key, name };
 };
 
