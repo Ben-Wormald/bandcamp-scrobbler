@@ -20,7 +20,12 @@
     "tabs",
     "storage",
     "https://*.bandcamp.com/"
- ],
- "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bandcamp-scrobbler@benwormald.co.uk"
+    }
+  },
   "manifest_version": 2
 }

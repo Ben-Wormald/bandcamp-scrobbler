@@ -9,18 +9,17 @@ const sendMessage = (type, data, done) => {
 
 const getAlbumInfo = (done, error) => {
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-    const { url } = tabs[0];
+    const { url, id: tabId } = tabs[0];
+
     if (url.match(albumRegex)) {
-      chrome.tabs.getSelected(null, tab => {
-        try {
-          chrome.tabs.executeScript(tab.id, { code: getHtml }, result => {
-            const html = result[0];
-            done(parseAlbumInfo(html, url));
-          });
-        } catch(e) {
-          error(e);
-        }
-      });
+      try {
+        chrome.tabs.executeScript(tabId, { code: getHtml }, result => {
+          const html = result[0];
+          done(parseAlbumInfo(html, url));
+        });
+      } catch(e) {
+        error(e);
+      }
     } else {
       error();
     }
