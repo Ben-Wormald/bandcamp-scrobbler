@@ -1,7 +1,7 @@
 # Bandcamp Scrobbler
 
 A browser extension for scrobbling to Last.fm from a Bandcamp album page.
-Available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/bandcamp-scrobbler/cnmjkkjnmdhhemfbokmblfioalnbnlej).
+Available for [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/bandcamp-scrobbler/) and [Chrome](https://chrome.google.com/webstore/detail/bandcamp-scrobbler/cnmjkkjnmdhhemfbokmblfioalnbnlej).
 
 Open the extension on any Bandcamp album page.
 You can adjust the album details before scrobbling, and clear the title of any tracks you want to skip.
