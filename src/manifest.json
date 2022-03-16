@@ -1,6 +1,6 @@
 {
   "name": "Bandcamp Scrobbler",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Scrobble albums on Bandcamp to Last.fm",
   "icons": {
     "16": "resource/icon16.png",
@@ -17,11 +17,11 @@
     "persistent": false
   },
   "permissions": [
-    "tabs",
+    "activeTab",
     "storage",
     "https://*.bandcamp.com/"
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
   "browser_specific_settings": {
     "gecko": {
       "id": "bandcamp-scrobbler@benwormald.co.uk"
