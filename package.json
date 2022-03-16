@@ -4,7 +4,7 @@
   "description": "Browser extension for scrobbling albums on Bandcamp to Last.fm",
   "scripts": {
     "build": "./check-env && webpack --mode=production",
-    "build:firefox": "npm run build && cd dist && zip -r Archive.xpi ./*"
+    "build:firefox": "npm run build && cd dist && zip -r bandcamp-scrobbler.xpi ./*"
   },
   "author": "Ben-Wormald",
   "license": "ISC",
