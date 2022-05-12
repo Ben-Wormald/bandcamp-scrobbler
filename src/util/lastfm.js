@@ -16,30 +16,30 @@ const processDurations = (data, count) => {
     }
   }
   return data;
-}
+};
 
 const processTrackData = ({ artist, title, tracks }) => {
   const trackData = {};
   let count = 0
 
-  tracks.forEach((track, index) => {
-    if (!track.name || !track.duration) return;
+  tracks
+    .filter(({ name, duration}) => name && duration)
+    .forEach((track, index) => {
+      var duration = track.duration.split(':');
+      duration = duration.length === 1 ? parseInt(duration[0]) : parseInt(duration[0]) * 60 + parseInt(duration[1]);
 
-    var duration = track.duration.split(':');
-    duration = duration.length === 1 ? parseInt(duration[0]) : parseInt(duration[0]) * 60 + parseInt(duration[1]);
+      trackData[`artist[${index}]`] = track.artist || artist;
+      trackData[`albumArtist[${index}]`] = artist;
+      trackData[`album[${index}]`] = title;
+      trackData[`track[${index}]`] = track.name;
+      trackData[`duration[${index}]`] = duration;
+      trackData[`trackNumber[${index}]`] = index + 1;
 
-    trackData[`artist[${index}]`] = track.artist || artist;
-    trackData[`albumArtist[${index}]`] = artist;
-    trackData[`album[${index}]`] = title;
-    trackData[`track[${index}]`] = track.name;
-    trackData[`duration[${index}]`] = duration;
-    trackData[`trackNumber[${index}]`] = index + 1;
-
-    count++;
-  });
+      count++;
+    });
 
   return processDurations(trackData, count);
-}
+};
 
 const generateSignature = data => {
   const urlParams = [];
@@ -50,7 +50,7 @@ const generateSignature = data => {
   }
   urlParams.sort();
   return md5(urlParams.join('') + process.env.SECRET_KEY);
-}
+};
 
 const processResponse = ({ scrobbles }) => {
   const response = {
@@ -69,7 +69,7 @@ const processResponse = ({ scrobbles }) => {
     });
   }
   return response;
-}
+};
 
 const scrobble = async (albumData, sessionKey) => {
   const trackData = processTrackData(albumData);
@@ -92,7 +92,7 @@ const scrobble = async (albumData, sessionKey) => {
 
   const json = await response.json();
   return processResponse(json);
-}
+};
 
 const getToken = async () => {
   const params = {
