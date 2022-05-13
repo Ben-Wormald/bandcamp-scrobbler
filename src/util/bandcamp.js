@@ -2,7 +2,7 @@ const selectors = {
   artist: '#name-section span',
   title: '#name-section .trackTitle',
   track: {
-    container: '#track_table tr',
+    container: '#track_table .track_row_view',
     name: '.track-title',
     duration: '.time',
   },

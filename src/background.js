@@ -5,7 +5,7 @@ const handleMessage = async (type, data, done) => {
     const { token, apiKey } = await getToken();
     console.log(`Got auth token ${token}`);
 
-    const authUrl = `http://www.last.fm/api/auth/?api_key=${apiKey}&token=${token}`;
+    const authUrl = `https://www.last.fm/api/auth/?api_key=${apiKey}&token=${token}`;
     chrome.tabs.create({ url: authUrl });
 
     chrome.storage.sync.set({ token }, () => {
