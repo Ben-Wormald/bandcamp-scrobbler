@@ -82,7 +82,7 @@ const scrobble = async (albumData, sessionKey) => {
 
   const body = new URLSearchParams(trackData).toString();
 
-  const response = await fetch('http://ws.audioscrobbler.com/2.0/', {
+  const response = await fetch('https://ws.audioscrobbler.com/2.0/', {
     method: 'POST',
     body,
     headers: {
@@ -101,7 +101,7 @@ const getToken = async () => {
     format: 'json',
   };
 
-  const url = `http://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
+  const url = `https://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
   const response = await fetch(url);
 
   const { token } = await response.json();
@@ -120,7 +120,7 @@ const getSession = async token => {
   };
   params.api_sig = generateSignature(params);
 
-  const url = `http://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
+  const url = `https://ws.audioscrobbler.com/2.0/?${new URLSearchParams(params)}`;
   const response = await fetch(url);
 
   const { session: { key, name } } = await response.json();
