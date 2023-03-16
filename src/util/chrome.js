@@ -1,6 +1,6 @@
 const { selectors } = require('./bandcamp');
 
-const albumRegex = /^https:\/\/[a-zA-Z0-9_-]+\.bandcamp\.com\/album\/[a-zA-Z0-9_-]+$/;
+const albumRegex = /^https:\/\/[a-zA-Z0-9_-]+\.bandcamp\.com\/album\/[a-zA-Z0-9_-]+[a-zA-Z0-9_=&+-?]*$/;
 const getHtml = `(function() { return document.documentElement.outerHTML; })()`;
 
 const sendMessage = (type, data, done) => {
