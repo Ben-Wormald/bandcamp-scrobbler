@@ -2,7 +2,22 @@ const { DefinePlugin: Define } = require('webpack');
 const { CleanWebpackPlugin: Clean } = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 
-module.exports = {
+const MODE_PRODUCTION = 'production';
+
+const transformManifest = (content, { mode }) => {
+  const manifest = JSON.parse(content.toString());
+
+  manifest.name = mode === MODE_PRODUCTION
+    ? 'Bandcamp Scrobbler'
+    : 'Bandcamp Scrobbler [dev]';
+  manifest.browser_specific_settings.gecko.id = mode === MODE_PRODUCTION
+    ? 'bandcamp-scrobbler@benwormald.co.uk'
+    : 'bandcamp-scrobbler-dev@benwormald.co.uk';
+
+  return JSON.stringify(manifest, null, 2);
+};
+
+module.exports = (_env, argv) => ({
   module: {
     rules: [
       {
@@ -29,7 +44,10 @@ module.exports = {
       patterns: [
         { from: './src/popup.html' },
         { from: './src/popup.css' },
-        { from: './src/manifest.json' },
+        {
+          from: './src/manifest.json',
+          transform: (content) => transformManifest(content, argv),
+        },
         { from: './src/resource/', to: 'resource/' },
       ],
     }),
@@ -44,4 +62,4 @@ module.exports = {
     tls: 'empty',
   },
   performance: { hints: false },
-};
+});

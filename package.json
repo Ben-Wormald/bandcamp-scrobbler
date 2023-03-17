@@ -1,11 +1,16 @@
 {
   "name": "bandcamp-scrobbler",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "Browser extension for scrobbling albums on Bandcamp to Last.fm",
   "scripts": {
     "build": "./check-env && webpack --mode=production",
-    "build:firefox": "npm run build && cd dist && zip -r bandcamp-scrobbler.xpi ./*",
-    "build:chrome": "npm run build && cd dist && zip -r bandcamp-scrobbler.zip ./*"
+    "build:dev": "./check-env && webpack --mode=development",
+    "package:firefox": "cd dist && zip -r bandcamp-scrobbler.xpi ./*",
+    "package:chrome": "cd dist && zip -r bandcamp-scrobbler.zip ./*",
+    "build:firefox": "npm run build && npm run package:firefox",
+    "build:chrome": "npm run build && npm run package:chrome",
+    "build:dev:firefox": "npm run build:dev && npm run package:firefox",
+    "build:dev:chrome": "npm run build:dev && npm run package:chrome"
   },
   "author": "Ben-Wormald",
   "license": "ISC",
