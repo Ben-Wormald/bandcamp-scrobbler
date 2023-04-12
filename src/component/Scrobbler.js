@@ -10,16 +10,15 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    getAlbumInfo(
-      albumInfo => {
+    (async () => {
+      const albumInfo = await getAlbumInfo();
+
+      if (albumInfo) {
         setAlbum(checkCompilation(albumInfo));
-        setLoading(false);
-      },
-      error => {
-        console.error(error);
-        setLoading(false);
-      },
-    );
+      }
+
+      setLoading(false);
+    })();
   }, []);
 
   const handleScrobble = () => {

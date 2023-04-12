@@ -1,18 +1,33 @@
 const { DefinePlugin: Define } = require('webpack');
-const { CleanWebpackPlugin: Clean } = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 
 const MODE_PRODUCTION = 'production';
+const FIREFOX = 'firefox';
 
 const transformManifest = (content, { mode }) => {
+  const browser = process.env.BROWSER;
+
   const manifest = JSON.parse(content.toString());
+
+  if (browser === FIREFOX) {
+    manifest.background = {
+      scripts: [
+        manifest.background.service_worker,
+      ],
+    };
+
+    manifest.browser_specific_settings = {
+      gecko: {
+        id: mode === MODE_PRODUCTION
+          ? 'bandcamp-scrobbler@benwormald.co.uk'
+          : 'bandcamp-scrobbler-dev@benwormald.co.uk',
+      },
+    };
+  }
 
   manifest.name = mode === MODE_PRODUCTION
     ? 'Bandcamp Scrobbler'
     : 'Bandcamp Scrobbler [dev]';
-  manifest.browser_specific_settings.gecko.id = mode === MODE_PRODUCTION
-    ? 'bandcamp-scrobbler@benwormald.co.uk'
-    : 'bandcamp-scrobbler-dev@benwormald.co.uk';
 
   return JSON.stringify(manifest, null, 2);
 };
@@ -39,7 +54,6 @@ module.exports = (_env, argv) => ({
     background: './src/background.js',
   },
   plugins: [
-    new Clean(),
     new Copy({
       patterns: [
         { from: './src/popup.html' },
@@ -56,10 +70,16 @@ module.exports = (_env, argv) => ({
       'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY || ''),
     }),
   ],
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
+  output: {
+    clean: true,
   },
+  resolve: {
+    fallback: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+    },
+  },
+  devtool: false,
   performance: { hints: false },
 });
