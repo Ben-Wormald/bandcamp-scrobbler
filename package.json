@@ -1,6 +1,6 @@
 {
   "name": "bandcamp-scrobbler",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Browser extension for scrobbling albums on Bandcamp to Last.fm",
   "scripts": {
     "build": "./check-env && webpack --mode=production",
