@@ -1,4 +1,4 @@
-const md5 = require('js-md5');
+import md5 from 'js-md5';
 
 const dropInvalidDurations = false;
 
@@ -127,6 +127,8 @@ const getSession = async token => {
   return { key, name };
 };
 
-module.exports.scrobble = scrobble;
-module.exports.getToken = getToken;
-module.exports.getSession = getSession;
+export {
+  scrobble,
+  getToken, 
+  getSession,
+};

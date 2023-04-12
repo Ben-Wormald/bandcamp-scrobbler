@@ -1,4 +1,4 @@
-const { scrobble, getToken, getSession } = require('./util/lastfm');
+import { scrobble, getToken, getSession } from './util/lastfm.js';
 
 const handleMessage = async (type, data, done) => {
   if (type === 'getToken') {

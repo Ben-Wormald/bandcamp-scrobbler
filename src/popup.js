@@ -1,8 +1,8 @@
-const { h, render } = require('preact');
-const { useState, useEffect } = require('preact/hooks');
-const { Auth } = require('./component/Auth');
-const { Scrobbler } = require('./component/Scrobbler');
-const { sendMessage } = require('./util/chrome');
+import { h, render } from 'preact';
+import { useState, useEffect } from 'preact/hooks';
+import Auth from './component/Auth.js';
+import Scrobbler from './component/Scrobbler.js';
+import { sendMessage } from './util/chrome.js';
 
 const App = () => {
   const [loading, setLoading] = useState(true);

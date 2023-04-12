@@ -7,25 +7,19 @@
     "48": "resource/icon48.png",
     "128": "resource/icon128.png"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "permissions": [
+    "scripting",
     "activeTab",
-    "storage",
+    "storage"
+  ],
+  "host_permissions": [
     "https://*.bandcamp.com/"
   ],
-  "content_security_policy": "script-src 'self'; object-src 'self'",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "bandcamp-scrobbler@benwormald.co.uk"
-    }
-  },
-  "manifest_version": 2
+  "manifest_version": 3
 }
