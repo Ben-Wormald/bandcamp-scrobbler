@@ -1,4 +1,4 @@
-const { selectors } = require('./bandcamp');
+import { selectors } from './bandcamp.js';
 
 const albumRegex = /^https:\/\/[a-zA-Z0-9_-]+\.bandcamp\.com\/album\/[a-zA-Z0-9_-]+[a-zA-Z0-9_=&+-?]*$/;
 
@@ -41,6 +41,8 @@ const getAlbumInfo = async () => {
 
 const openTab = url => chrome.tabs.create({ active: true, url });
 
-module.exports.sendMessage = sendMessage;
-module.exports.getAlbumInfo = getAlbumInfo;
-module.exports.openTab = openTab;
+export {
+  sendMessage,
+  getAlbumInfo,
+  openTab,
+};

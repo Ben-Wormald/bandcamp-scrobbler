@@ -1,5 +1,5 @@
-const { DefinePlugin: Define } = require('webpack');
-const Copy = require('copy-webpack-plugin');
+import webpack from 'webpack';
+import Copy from 'copy-webpack-plugin';
 
 const MODE_PRODUCTION = 'production';
 const FIREFOX = 'firefox';
@@ -32,7 +32,7 @@ const transformManifest = (content, { mode }) => {
   return JSON.stringify(manifest, null, 2);
 };
 
-module.exports = (_env, argv) => ({
+export default (_env, argv) => ({
   module: {
     rules: [
       {
@@ -65,7 +65,7 @@ module.exports = (_env, argv) => ({
         { from: './src/resource/', to: 'resource/' },
       ],
     }),
-    new Define({
+    new webpack.DefinePlugin({
       'process.env.API_KEY': JSON.stringify(process.env.API_KEY || ''),
       'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY || ''),
     }),

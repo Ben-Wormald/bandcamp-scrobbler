@@ -1,5 +1,5 @@
-const { h } = require('preact');
-const { sendMessage } = require('../util/chrome');
+import { h } from 'preact';
+import { sendMessage } from '../util/chrome.js';
 
 const Auth = ({ hasToken, setHasToken, setUsername }) => {
   const handleSignIn = () => {
@@ -28,4 +28,4 @@ const Auth = ({ hasToken, setHasToken, setUsername }) => {
   );
 };
 
-module.exports.Auth = Auth;
+export default Auth;

@@ -1,4 +1,4 @@
-const { h } = require('preact');
+import { h } from 'preact';
 
 const Album = ({ album, setAlbum, handleScrobble }) => {
   const updateAlbum = field => ({ target: { value } }) => {
@@ -59,4 +59,4 @@ const Album = ({ album, setAlbum, handleScrobble }) => {
   );
 };
 
-module.exports.Album = Album;
+export default Album;
