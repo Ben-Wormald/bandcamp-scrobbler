@@ -1,8 +1,8 @@
-const { h, Fragment } = require('preact');
-const { useState, useEffect } = require('preact/hooks');
-const { Album } = require('./Album');
-const { sendMessage, getAlbumInfo, openTab } = require('../util/chrome');
-const { checkCompilation } = require('../util/bandcamp');
+import { h, Fragment } from 'preact';
+import { useState, useEffect } from 'preact/hooks';
+import Album from './Album.jsx';
+import { sendMessage, getAlbumInfo, openTab } from '../utils/chrome.js';
+import { checkCompilation } from '../utils/bandcamp.js';
 
 const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [loading, setLoading] = useState(true);
@@ -10,16 +10,15 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    getAlbumInfo(
-      albumInfo => {
+    (async () => {
+      const albumInfo = await getAlbumInfo();
+
+      if (albumInfo) {
         setAlbum(checkCompilation(albumInfo));
-        setLoading(false);
-      },
-      error => {
-        console.error(error);
-        setLoading(false);
-      },
-    );
+      }
+
+      setLoading(false);
+    })();
   }, []);
 
   const handleScrobble = () => {
@@ -63,4 +62,4 @@ const Scrobbler = ({ username, setHasToken, setUsername }) => {
   );
 };
 
-module.exports.Scrobbler = Scrobbler;
+export default Scrobbler;

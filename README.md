@@ -13,13 +13,20 @@ To compile the extension yourself, you'll need to provide keys for your own [Las
 ```bash
 export API_KEY=xxx
 export SECRET_KEY=xxx
+# or
+echo "API_KEY=xxx\nSECRET_KEY=xxx" > .env
 
 npm install
-npm run build
+
+npm run build:dev:firefox
+# or
+npm run build:dev:chrome
 ```
 
 ### Firefox
-Compress all files in the `dist` folder to a zip file with the `.xpi` extension, then click **Load Temporary Add-on...** from `about:debugging`.
+1. Go to `about:debugging` and click **This Firefox**
+2. Click **Load Temporary Add-on...** and select `bandcamp-scrobbler.zip`
 
 ### Chrome
-From **Manage Extensions** in Chrome, click **Load unpacked** and select the `dist` folder.
+1. Go to **Manage Extensions**
+2. click **Load unpacked** and select the `dist` folder

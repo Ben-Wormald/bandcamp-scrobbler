@@ -28,5 +28,7 @@ const checkCompilation = album => {
   return album;
 };
 
-module.exports.selectors = selectors;
-module.exports.checkCompilation = checkCompilation;
+export {
+  selectors,
+  checkCompilation,
+};
