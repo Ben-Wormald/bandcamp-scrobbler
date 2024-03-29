@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { build } from 'esbuild';
 import { copyFile, mkdir, rm } from 'node:fs/promises';
 
