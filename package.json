@@ -6,12 +6,11 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "build:dev:firefox": "MODE=dev BROWSER=firefox node build.js && npm run package:zip",
+    "build:dev:firefox": "MODE=dev BROWSER=firefox node build.js && npm run package",
     "build:dev:chrome": "MODE=dev BROWSER=chrome node build.js",
-    "build:firefox": "BROWSER=firefox node build.js && npm run package:xpi",
-    "build:chrome": "BROWSER=chrome node build.js && npm run package:zip",
-    "package:xpi": "cd dist && zip -rq ../bandcamp-scrobbler.xpi ./*",
-    "package:zip": "cd dist && zip -rq ../bandcamp-scrobbler.zip ./*"
+    "build:firefox": "BROWSER=firefox node build.js && npm run package",
+    "build:chrome": "BROWSER=chrome node build.js && npm run package",
+    "package": "cd dist && zip -rq ../bandcamp-scrobbler.zip ./*"
   },
   "dependencies": {
     "js-md5": "^0.8.3",
