@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { sendMessage } from '../util/chrome.js';
+import { sendMessage } from '../utils/chrome.js';
 
 const Auth = ({ hasToken, setHasToken, setUsername }) => {
   const handleSignIn = () => {

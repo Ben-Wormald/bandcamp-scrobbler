@@ -15,7 +15,10 @@ export API_KEY=xxx
 export SECRET_KEY=xxx
 
 npm install
-npm run build
+
+npm run build:dev:firefox
+# or
+npm run build:dev:chrome
 ```
 
 ### Firefox

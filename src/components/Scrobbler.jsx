@@ -1,8 +1,8 @@
 import { h, Fragment } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import Album from './Album.js';
-import { sendMessage, getAlbumInfo, openTab } from '../util/chrome.js';
-import { checkCompilation } from '../util/bandcamp.js';
+import Album from './Album.jsx';
+import { sendMessage, getAlbumInfo, openTab } from '../utils/chrome.js';
+import { checkCompilation } from '../utils/bandcamp.js';
 
 const Scrobbler = ({ username, setHasToken, setUsername }) => {
   const [loading, setLoading] = useState(true);

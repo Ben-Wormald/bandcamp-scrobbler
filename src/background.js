@@ -1,4 +1,4 @@
-import { scrobble, getToken, getSession } from './util/lastfm.js';
+import { scrobble, getToken, getSession } from './utils/lastfm.js';
 
 const handleMessage = async (type, data, done) => {
   if (type === 'getToken') {
