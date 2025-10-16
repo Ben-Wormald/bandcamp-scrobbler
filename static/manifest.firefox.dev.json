@@ -1,6 +1,6 @@
 {
   "name": "Bandcamp Scrobbler [dev]",
-  "version": "1.6",
+  "version": "1.7",
   "description": "Scrobble albums on Bandcamp to Last.fm",
   "icons": {
     "16": "resources/icon16.png",

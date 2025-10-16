@@ -1,6 +1,6 @@
 import { selectors } from './bandcamp.js';
 
-const albumRegex = /^https:\/\/[a-zA-Z0-9_-]+\.bandcamp\.com\/album\/[a-zA-Z0-9_-]+[a-zA-Z0-9_=&+-?]*$/;
+const albumRegex = /^https:\/\/[a-zA-Z0-9_-]+\.bandcamp\.com\/album\/.+$/;
 
 const sendMessage = (type, data, done) => {
   chrome.runtime.sendMessage({ type, data }, done);

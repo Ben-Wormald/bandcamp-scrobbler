@@ -1,6 +1,6 @@
 {
   "name": "bandcamp-scrobbler",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Browser extension for scrobbling albums on Bandcamp to Last.fm",
   "author": "Ben-Wormald",
   "license": "ISC",
@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "js-md5": "^0.8.3",
-    "preact": "^10.20.1"
+    "preact": "^10.27.2"
   },
   "devDependencies": {
-    "dotenv": "^16.4.5",
-    "esbuild": "^0.20.2"
+    "dotenv": "^17.2.3",
+    "esbuild": "^0.25.11"
   }
 }
