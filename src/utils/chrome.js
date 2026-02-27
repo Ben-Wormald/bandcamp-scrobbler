@@ -20,7 +20,7 @@ const getAlbumInfo = async () => {
     },
     func: () => document.documentElement.outerHTML,
   });
-  
+
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
 
@@ -29,12 +29,18 @@ const getAlbumInfo = async () => {
 
   const trackContainers = doc.querySelectorAll(selectors.track.container);
 
-  const tracks = Array.from(trackContainers).map((track) => {
-    const name = track.querySelector(selectors.track.name).textContent.trim();
-    const duration = track.querySelector(selectors.track.duration).textContent.trim();
-
-    return { name, duration };
-  });
+  const tracks = Array.from(trackContainers)
+    .map((track, index) => {
+      try {
+        const name = track.querySelector(selectors.track.name).textContent.trim();
+        const duration = track.querySelector(selectors.track.duration).textContent.trim();
+        return { name, duration };
+      } catch (error) {
+        console.debug(`Failed to get details of track ${index + 1}:`, error);
+        return null;
+      }
+    })
+    .filter((track) => track !== null);
 
   return { artist, title, tracks };
 };
